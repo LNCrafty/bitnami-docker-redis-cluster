@@ -86,6 +86,9 @@ redis_cluster_override_conf() {
     if ! (is_boolean_yes "$REDIS_CLUSTER_DYNAMIC_IPS" || is_boolean_yes "$REDIS_CLUSTER_CREATOR"); then
         redis_conf_set cluster-announce-ip "$REDIS_CLUSTER_ANNOUNCE_IP"
     fi
+    if ! (is_boolean_yes "$REDIS_CLUSTER_DYNAMIC_IPS" || is_boolean_yes "$REDIS_CLUSTER_CREATOR"); then
+        redis_conf_set cluster-announce-port "$REDIS_CLUSTER_ANNOUNCE_PORT"
+    fi
     if is_boolean_yes "$REDIS_TLS_ENABLED"; then
         redis_conf_set tls-cluster yes
         redis_conf_set tls-replication yes
